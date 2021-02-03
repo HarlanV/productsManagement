@@ -23,4 +23,18 @@ class ProductObserver
             new ProductCreated($product)
         );
     }
+
+    /**
+     * Handle the Product "deleted" event.
+     *
+     * @param  \App\Models\Product  $product
+     * @return void
+     */
+    public function deleted(Product $product)
+    {
+        SendEmail::dispatch(
+            new ProductDeleted($product)
+        );
+    }
+
 }
