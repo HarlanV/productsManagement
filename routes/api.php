@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('categories')->name('categories.')->group(function () {
+    Route::post('/', [CategoryController::class, 'store'])->name('store');
+    Route::get('/', [CategoryController::class, 'index'])->name('index');
+    Route::get('{category}', [CategoryController::class, 'show'])->name('show');
+    Route::put('{category}', [CategoryController::class, 'update'])->name('update');
+    Route::delete('{category}', [CategoryController::class, 'destroy'])->name('destroy');
 });
